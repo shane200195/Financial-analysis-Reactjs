@@ -32,12 +32,12 @@ function graph_data(graph_type, graph_x_labels, graph_data, graph_y_label){
             labels: graph_x_labels,
             datasets: [{
 		            labels: graph_x_labels,
-								lineTension: 0,
 		            label: false,
 		            data: graph_data,
 		            fill: false,
 		            borderColor: 'rgb(255,0,0)',
-		            pointRadius: 0.5
+		            pointRadius: 0.5,
+								lineTension: 0
         	}]
         },
         options: {
