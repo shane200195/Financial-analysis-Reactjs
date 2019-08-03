@@ -17,10 +17,15 @@
                 <!-- User input in here !-->
             </div>
 
+						<!-- REACT TEST FIELD !-->
+						<div id="react-test"></div>
 	      </div>
-	      <button type="submit" class="submit-button">Submit</button>
-	    </form>
 
+				<!-- Testing if the react button is working !-->
+				<div id="react-button-test"></div>
+	      <!-- <button type="submit" class="submit-button">Submit (Non-react)</button> TEMPOARILY DELETED!-->
+
+	    </form>
         <!-- Selecting a method of analysis !-->
         <select id="selection-choice">
             <option id="default-option">----</option>
@@ -32,7 +37,12 @@
 	    <script src="{{ url_for('static', filename='jquery.js') }}" type="text/javascript"></script>
 	    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js" type="text/javascript"></script>
 
-        <!-- Canvas for the grph that will be generated !-->
+			<!-- Importing React JS (may delete) !-->
+			<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  		<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+			<script src="{{ url_for('static', filename='react.js') }}"></script>
+
+      <!-- Canvas for the grph that will be generated !-->
 	    <div class="graph-container">
         	<canvas id="myChart" width="400" height="200"></canvas>
     	</div>
@@ -44,6 +54,9 @@
 
         <!-- AJAX/jQuery implementation !-->
 	    <script type="text/javascript">
+				//rendering the submit button
+				ReactDOM.render(e(SubmitButton), document.getElementById('react-button-test'));
+
     		$(function(){
 
                 $('#selection-choice').on('change', function(event) {
@@ -51,29 +64,35 @@
                     //getting the value of the user's method of analysis
                     analysis_mode = $('#selection-choice').val()
 
+										//declaring the react container
+										const domContainer = document.querySelector('#react-test');
+
                     //checking which method of analysis the user used
                     if(analysis_mode == "Linear Regression"){
 
                         //deleting the existing boxes, and creating the new required forms
-                        $('#addition_info').empty();
-                        $('#addition_info').append(
-                            "<label for='nameInput'>Days in the past</label> <input type='text' id='days' placeholder='50'> <label for='nameInput'>How many data point do you want the regression to go for</label> <input type='text' id='lin_regression' placeholder='50'>");
+												ReactDOM.render(e(LinRegression), domContainer);
+												//PRE-REACT VERSION
+                        //$('#addition_info').empty();
+                        //$('#addition_info').append(
+                        //"<label for='nameInput'>Days in the past</label> <input type='text' id='days' placeholder='50'> <label for='nameInput'>How many data point do you want the regression to go for</label> <input type='text' id='lin_regression' placeholder='50'>");
                     }else if(analysis_mode == "Moving Average"){
-
-                        //deleting the existing boxes, and creating the new required forms
-                        $('#addition_info').empty();
-                        $('#addition_info').append("<label for='nameInput'>Number of days in MA</label> <input type='text' id='past_days' placeholder='50'><label for='nameInput'>Total number of days</label> <input type='text' id='total_days' placeholder='50'>");
+												//deleting the existing boxes, and creating the new required forms
+												ReactDOM.render(e(MovingAverage), domContainer);
+												//PRE-REACT VERSION
+                        //$('#addition_info').empty();
+                        //$('#addition_info').append("<label for='nameInput'>Number of days in MA</label> <input type='text' id='past_days' placeholder='50'><label for='nameInput'>Total number of days</label> <input type='text' id='total_days' placeholder='50'>");
                     }
                 });
 
                 //Sending the data to the server with AJAX, and graphing the processed data
-    			$('.submit-button').on('click', function(event) {
+    			/*$('.submit-button').on('click', function(event) {
                     if(analysis_mode == "Linear Regression"){
                         lin_regression_ajax(event);
                     }else if(analysis_mode == "Moving Average"){
                         moving_average_ajax(event)
                     }
-    			});
+    			});*/
     		})
 	    </script>
 	</body>

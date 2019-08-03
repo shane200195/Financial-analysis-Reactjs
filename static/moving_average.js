@@ -12,7 +12,7 @@ function moving_average_ajax(event){
         //sending the user's desired stock, how many days in the history they want, and how long they want their moving averages to be
 		data: {name: input, rolling: days_past, history: total_day},
 	})
-	
+
 	//creating the graph once the data has been received from flask backend
 	.done(function(data) {
 		graph_data('line', data.date, data.MA_price, "Moving Average")
@@ -31,6 +31,7 @@ function graph_data(graph_type, graph_x_labels, graph_data, graph_y_label){
         data: {
             labels: graph_x_labels,
             datasets: [{
+								lineTension: 0,
 		            labels: graph_x_labels,
 		            label: false,
 		            data: graph_data,

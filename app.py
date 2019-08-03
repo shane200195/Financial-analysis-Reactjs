@@ -13,7 +13,8 @@ def alpha_vantage_timeseries(ticker):
 	ts = TimeSeries(key="4RKAADTMMAZ4U000", output_format = 'pandas')
 
 	#retreiving the stock with appropriate tickers
-	data, meta_data = ts.get_intraday(symbol='NASDAQ:' + ticker,interval='5min', outputsize='full')
+    #add the ability to choose between daily or minutely states?
+	data, meta_data = ts.get_daily(symbol='NASDAQ:' + ticker, outputsize='full')
 	data = data.rename(columns={"1. open":"open", "2. high":"high", "3. low":"low", "4. close":"close", "5. volume":"volume"})
 
 	#testing/manipulating pandas section
@@ -27,7 +28,7 @@ def test():
 #retreiving the input from the page, in order to obtain the ticker name of the stock
 @app.route("/lin_regression", methods=["POST"])
 def lin_regression():
-	from lin_regression import generate_equation
+	from analysis_tools.lin_regression import generate_equation
 
 	#getting the stock data that the user wants
 	stockName = request.form['name']
@@ -46,7 +47,7 @@ def lin_regression():
 
 @app.route("/moving_average", methods=["POST"])
 def moving_average():
-	from moving_average import moving_average
+	from analysis_tools.moving_average import moving_average
 
 	#getting the number of days you want to go back
 	stockName = request.form['name']

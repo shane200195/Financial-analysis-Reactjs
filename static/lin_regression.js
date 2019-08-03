@@ -26,6 +26,7 @@ function create_line(y_cor, graph_x_labels, graph_y_label, graph_data, length_pe
 	//array to store the group of lines that will be generated from linear regression
 	var calculated_lines = [{
                 label: graph_y_label,
+								lineTension: 0,
                 //default data is the base line (actual line of stock)
                 data: graph_data,
                 borderColor: 'rgb(0,0,0)',
