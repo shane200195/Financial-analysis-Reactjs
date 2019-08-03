@@ -37,7 +37,7 @@ function graph_data(graph_type, graph_x_labels, graph_data, graph_y_label){
 		            fill: false,
 		            borderColor: 'rgb(255,0,0)',
 		            pointRadius: 0.5,
-								lineTension: 0
+		            lineTension: 0
         	}]
         },
         options: {
