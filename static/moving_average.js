@@ -1,9 +1,7 @@
-function moving_average_ajax(event){
+function moving_average_ajax(event, days_past, total_day){
 
 	//getting the value required to conduct linear regression
 	var input = $('#stockName').val();
-    var days_past = $('#past_days').val();
-    var total_day = $('#total_days').val();
 
 	//sending an ajax request to the server, sending the ticker requested by client
 	$.ajax({

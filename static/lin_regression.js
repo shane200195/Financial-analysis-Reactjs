@@ -54,12 +54,10 @@ function create_line(y_cor, graph_x_labels, graph_y_label, graph_data, length_pe
 	return calculated_lines
 }
 
-function lin_regression_ajax(event){
+function lin_regression_ajax(event, days_past, regression_len){
 
 	//getting the value required to conduct linear regression
 	var input = $('#stockName').val();
-    var days_past = $('#days').val();
-    var regression_len = parseInt($('#lin_regression').val());
 
 	//sending an ajax request to the server, sending the ticker requested by client
 	$.ajax({
